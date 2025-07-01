@@ -1,0 +1,24 @@
+name: sperm-analysis-app
+services:
+  - name: sperm-analyzer-frontend
+    type: web
+    git:
+      branch: main
+      build_command: npm run build
+      run_command: npm run preview
+    instance_type: nano
+    ports:
+      - port: 4173
+        protocol: http
+    env:
+      - key: NODE_ENV
+        value: production
+    health_check:
+      http:
+        path: /
+    auto_deploy: true
+    regions:
+      - fra
+    scaling:
+      min: 1
+      max: 1
